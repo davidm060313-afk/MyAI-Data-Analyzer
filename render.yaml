@@ -2,6 +2,7 @@ services:
   - type: web
     name: myai-data-analyzer
     runtime: python
+    plan: free
     buildCommand: pip install -r requirements.txt
     startCommand: gunicorn app:app
     envVars:
@@ -10,18 +11,8 @@ services:
       - key: FLASK_SECRET_KEY
         generateValue: true
       - key: DATA_DIR
-        value: /var/data
+        value: /tmp/myai-data-analyzer
       - key: MAX_UPLOAD_MB
         value: 100
-      - key: DATABASE_URL
-        sync: false
       - key: MYAI_API_URL
-        sync: false
-      - key: MYAI_API_TOKEN
-        sync: false
-      - key: GEMINI_API_KEY
-        sync: false
-    disk:
-      name: analyzer-files
-      mountPath: /var/data
-      sizeGB: 10
+        value: https://myspace-rzni.onrender.com/api/ai
